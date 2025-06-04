@@ -1,0 +1,577 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Javascript八股文 | Hanxian's Blog</title><meta name="author" content="Harry Wang"><meta name="copyright" content="Harry Wang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="关于Javascipt的面试八股文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript八股文">
+<meta property="og:url" content="http://hanxian-wang.github.io/2025/05/28/interview.data-1/index.html">
+<meta property="og:site_name" content="Hanxian&#39;s Blog">
+<meta property="og:description" content="关于Javascipt的面试八股文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hanxian-wang.github.io/img/avatar.png">
+<meta property="article:published_time" content="2025-05-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-03T18:07:32.886Z">
+<meta property="article:author" content="Harry Wang">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hanxian-wang.github.io/img/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Javascript八股文",
+  "url": "http://hanxian-wang.github.io/2025/05/28/interview.data-1/",
+  "image": "http://hanxian-wang.github.io/img/avatar.png",
+  "datePublished": "2025-05-27T16:00:00.000Z",
+  "dateModified": "2025-06-03T18:07:32.886Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Harry Wang",
+      "url": "http://hanxian-wang.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.png"><link rel="canonical" href="http://hanxian-wang.github.io/2025/05/28/interview.data-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Javascript八股文',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="https://ai.tianli0.top/static/public/tianli_gpt.min.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Hanxian's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-table"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/notes/"><span> 摘要</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/top_banner.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hanxian's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Javascript八股文</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-table"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/notes/"><span> 摘要</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Javascript八股文</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-03T18:07:32.886Z" title="更新于 2025-06-04 02:07:32">2025-06-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="基础问题"><a href="#基础问题" class="headerlink" title="基础问题"></a>基础问题</h1><ul>
+<li><h2 id="Javascript-中有什么数据类型？他们的区别的有什么？"><a href="#Javascript-中有什么数据类型？他们的区别的有什么？" class="headerlink" title="Javascript 中有什么数据类型？他们的区别的有什么？"></a>Javascript 中有什么数据类型？他们的区别的有什么？</h2><blockquote>
+<p>数据类型：<strong>基本类型</strong>和<strong>引用类型</strong><br>基本类型：<strong>Number、String、Boolean、Null、Undefined、Symbol、BigInt(ES6 新增)</strong><br>引用类型：<strong>Object、Array、Function、Date</strong>等<br>区别：<br>声明变量时不同的内存地址分配：简单类型的值存放在栈中，在栈中存放的是对应的值;引用类型对应的值存储在堆中，在栈中存放的是指向堆内存的地址<br>不同的类型数据导致赋值变量时的不同：简单类型赋值，是生成相同的值，两个对象对应不同的地址;复杂类型赋值，是将保存对象的内存地址赋值给另一个变量。也就是两个变量指向堆内存中同一个对象</p>
+</blockquote>
+</li>
+<li><h2 id="谈谈-Javascript-中的类型转换机制"><a href="#谈谈-Javascript-中的类型转换机制" class="headerlink" title="谈谈 Javascript 中的类型转换机制"></a>谈谈 Javascript 中的类型转换机制</h2><blockquote>
+<p>类型：<strong>自动转换(隐式转换)<strong>和</strong>强制转换(显示转换)</strong></p>
+</blockquote>
+</li>
+<li><h2 id="谈谈-Javascript-中的闭包，闭包有什么特点？"><a href="#谈谈-Javascript-中的闭包，闭包有什么特点？" class="headerlink" title="谈谈 Javascript 中的闭包，闭包有什么特点？"></a>谈谈 Javascript 中的闭包，闭包有什么特点？</h2><blockquote>
+<p>定义：闭包就是一个函数和对其周围状态的引用的组合。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">funcOutside</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">funcInside</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">//内部函数调用外部函数的变量，由于闭包特性是可以访问到的</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>特点: 创建私有变量;延长变量的生命周期</p>
+</blockquote>
+</li>
+<li><h2 id="操作符’-’和’-’的区别"><a href="#操作符’-’和’-’的区别" class="headerlink" title="操作符’&#x3D;&#x3D;’和’&#x3D;&#x3D;&#x3D;’的区别"></a>操作符’&#x3D;&#x3D;’和’&#x3D;&#x3D;&#x3D;’的区别</h2><blockquote>
+<p>&#x3D;&#x3D;操作符，即为等于操作符，在变量进行比较的时候会<strong>先进行隐式转换</strong>，然后再进行变量之间的比对。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str1 = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num1 == str1); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>&#x3D;&#x3D;&#x3D;操作符，即为全等操作符，在变量进行比较的时候会<strong>直接进行变量之间的比对</strong>，不会如等于操作符一样先进行隐式转换。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str1 = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num1 === str1); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></li>
+<li><h2 id="深拷贝和浅拷贝的区别"><a href="#深拷贝和浅拷贝的区别" class="headerlink" title="深拷贝和浅拷贝的区别"></a>深拷贝和浅拷贝的区别</h2><h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><blockquote>
+<p>浅拷贝：创建新的数据，这份新的数据拥有原始数据属性值的一份精准拷贝。如果是基本类型拷贝，拷贝的是<strong>属性的值</strong>;如果是引用类型拷贝，拷贝的是<strong>内存地址</strong>。即拷贝的数据和原始数据共享同一内存地址。</p>
+</blockquote>
+<p><strong>实现一个浅拷贝</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">copy</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> newObj = &#123;&#125;; <span class="comment">// const不可以修改内存地址，但可以修改属性</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.<span class="title function_">hasOwnProperty</span>(prop)) &#123;</span><br><span class="line">      newObj[prop] = obj[prop];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在 Javascript 中存在浅拷贝现象的方法还有:</strong></p>
+<ul>
+<li>Object.assign()</li>
+<li>Array.prototype.slice(), Array.prototype.concat()</li>
+<li>…</li>
+</ul>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><blockquote>
+<p>深拷贝：开辟一个新的栈，两个对象属性完全相同，但是<strong>对应两个不同的地址</strong>，修改一个对象的属性，不会改变另一个对象的属性。</p>
+</blockquote>
+<p><strong>实现一个深拷贝</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在 Javascript 中存在深拷贝现象的方法还有:</strong></p>
+<ul>
+<li>_.cloneDeep()</li>
+<li>jQuery.extend()</li>
+<li>JSON.stringify()</li>
+<li>…</li>
+</ul>
+</li>
+<li><h2 id="什么是作用域链？"><a href="#什么是作用域链？" class="headerlink" title="什么是作用域链？"></a>什么是作用域链？</h2><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a><strong>作用域</strong></h3><blockquote>
+<p>作用域，即为变量和函数生效的区域或集合。<br>作用域一般分为：<strong>全局作用域、函数作用域和块级作用域(ES6+)</strong></p>
+</blockquote>
+<p><strong>全局作用域</strong></p>
+<blockquote>
+<p>任何不在函数中或是大括号中声明的变量，都是在全局作用域下，全局作用域下声明的变量可以在程序的任意位置访问。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">1</span>; <span class="comment">// 全局变量</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(num1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func</span>(); <span class="comment">// 输出 1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数作用域</strong></p>
+<blockquote>
+<p>函数作用域另称局部作用域，当一个变量是声明在函数内部时，它只能被函数内部进行访问，不能由函数外部进行访问。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(num1); <span class="comment">//输出 1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num1); <span class="comment">//Undefined</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>块级作用域</strong></p>
+<blockquote>
+<p>块级作用域是由 ES6 中新增的 let 和 const 关键字，在一对大括号中声明的 let 和 const 关键字存在于块级作用域中，在大括号之外不可访问。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> num2 = <span class="number">2</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(num1, num2); <span class="comment">// 1, 2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num1, num2); <span class="comment">// Undefined, Undefined</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>词法作用域</strong></p>
+<blockquote>
+<p>词法作用域就是静态作用域，一个变量一旦被创建就会被定义好其静态作用域，而不是代码执行过程中定义好的。</p>
+</blockquote>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a><strong>作用域链</strong></h3><blockquote>
+<p>作用域链就是当 Javascript 去使用一个变量的时候，会从当前作用域下开始寻找，如果没有找到则会依次向上寻找，直至最高层全局作用域。如果没有找到，则会隐式创建变量或者报错。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> num2 = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">func2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> num3 = <span class="number">3</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(num3); <span class="comment">// 当前作用域</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(num2); <span class="comment">// 往上找到num2，闭包</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(num1); <span class="comment">// 在全局作用域找到num1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(num3); <span class="comment">// 不可往下找，报错Undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func1</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><h2 id="谈谈-Javascript-中的原型和原型链"><a href="#谈谈-Javascript-中的原型和原型链" class="headerlink" title="谈谈 Javascript 中的原型和原型链"></a>谈谈 Javascript 中的原型和原型链</h2><h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><blockquote>
+<p>Javascript 是一种基于原型的语言，每个对象都会有对应的原型。对象的属性和方法定义在 Object 的构造器函数的 prototype 属性上。</p>
+</blockquote>
+<p><strong>原型对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">constructor</span>: ƒ <span class="string">&#x27;YourFunction&#x27;</span>(),</span><br><span class="line">  <span class="attr">__proto__</span>: &#123;</span><br><span class="line">      <span class="attr">constructor</span>: ƒ <span class="title class_">Object</span>(),</span><br><span class="line">      <span class="attr">hasOwnProperty</span>: ƒ <span class="title function_">hasOwnProperty</span>(),</span><br><span class="line">      <span class="attr">isPrototypeOf</span>: ƒ <span class="title function_">isPrototypeOf</span>(),</span><br><span class="line">      <span class="attr">propertyIsEnumerable</span>: ƒ <span class="title function_">propertyIsEnumerable</span>(),</span><br><span class="line">      <span class="attr">toLocaleString</span>: ƒ <span class="title function_">toLocaleString</span>(),</span><br><span class="line">      <span class="attr">toString</span>: ƒ <span class="title function_">toString</span>(),</span><br><span class="line">      <span class="attr">valueOf</span>: ƒ <span class="title function_">valueOf</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><blockquote>
+<p>原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为原型链 (prototype chain)，它解释了为何一个对象会拥有定义在其他对象中的属性和方法。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>一切对象都继承自 Object 对象，Object 对象直接继承根源对象 Null。</li>
+<li>一切函数对象都继承自 Function 对象。</li>
+<li>Object 直接继承自 Function 对象。</li>
+<li>Function 的<em>proto</em>指向自己的原型对象，最终指向 Object 对象。</li>
+</ul>
+</li>
+<li><h2 id="在-Javascript-中如何实现继承？"><a href="#在-Javascript-中如何实现继承？" class="headerlink" title="在 Javascript 中如何实现继承？"></a>在 Javascript 中如何实现继承？</h2><blockquote>
+<p>常见的继承方式：<strong>extends 关键字(ES6+)、原型链继承、构造函数继承、组合继承、原型式继承、寄生式继承、寄生组合式继承</strong>。</p>
+</blockquote>
+<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><blockquote>
+<p>原型链继承是比较常见的继承方式之一，其中涉及的构造函数、原型和实例，三者之间存在着一定的关系，即每一个构造函数都有一个原型对象，原型对象又包含一个指向构造函数的指针，而实例则包含一个原型对象的指针。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;parent1&quot;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">play</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">type</span> = <span class="string">&quot;child2&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Child1</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Parent</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">Child</span>());</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h3><blockquote>
+<p>父类的引用属性不会被共享，优化了第一种继承方式的弊端，但是只能继承父类的实例属性和方法，不能继承原型属性或者方法。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;parent1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getName</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title class_">Parent1</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>)</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">type</span> = <span class="string">&#x27;child&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> child = <span class="keyword">new</span> <span class="title class_">Child</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(child) <span class="comment">// 正常运行</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(chile.<span class="title function_">getName</span>()) <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><blockquote>
+<p>组合继承则将前两种方式继承起来。</p>
+</blockquote>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><blockquote>
+<p>借助Object.create方法实现普通对象的继承。</p>
+</blockquote>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><blockquote>
+<p>寄生式继承在原型式继承基础上进行优化，利用这个浅拷贝的能力再进行增强，添加一些方法。</p>
+</blockquote>
+<h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h3><blockquote>
+<p>借助解决普通对象的继承问题的Object.create 方法，在前面几种继承方式的优缺点基础上进行改造，这也是所有继承方式里面相对最优的继承方式。</p>
+</blockquote>
+</li>
+<li><h2 id="谈谈你对this对象的理解"><a href="#谈谈你对this对象的理解" class="headerlink" title="谈谈你对this对象的理解"></a>谈谈你对this对象的理解</h2><h3 id="this关键字是什么"><a href="#this关键字是什么" class="headerlink" title="this关键字是什么"></a>this关键字是什么</h3><blockquote>
+<p>this关键字是函数运行的时候自动生成的一个内部对象，只能在函数内部使用，this总指向调用他的对象。并且，this关键字<strong>一旦确定，不可更改。</strong>  </p>
+</blockquote>
+<h3 id="绑定规则和优先级"><a href="#绑定规则和优先级" class="headerlink" title="绑定规则和优先级"></a>绑定规则和优先级</h3><ul>
+<li>默认绑定</li>
+<li>隐式绑定</li>
+<li>显示绑定</li>
+<li>new绑定<blockquote>
+<p>new绑定&gt;显示绑定&gt;隐式绑定&gt;默认绑定</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><blockquote>
+<p>与传统函数不同，箭头函数中的this关键字<strong>指向该箭头函数被定义的对象</strong>。</p>
+</blockquote>
+</li>
+<li><h2 id="Javascript中执行上下文和执行栈是什么？"><a href="#Javascript中执行上下文和执行栈是什么？" class="headerlink" title="Javascript中执行上下文和执行栈是什么？"></a>Javascript中执行上下文和执行栈是什么？</h2><h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><blockquote>
+<p>执行上下文是一种对Javascript的代码执行环境的一种抽象概念，即只要有Javascript代码则会有执行上下文。  </p>
+</blockquote>
+<p><strong>执行上下文的类别</strong></p>
+<ul>
+<li>全局执行上下文：变量在全局内，只有一个全局执行上下文，浏览器的全局对象是window。</li>
+<li>函数执行上下文：可以有无数个，当函数被调用执行的时候，就会创建一个对应的函数执行上下文。</li>
+<li>Eval函数执行上下文：运行在eval函数中的代码，使用频率很低。</li>
+</ul>
+<p>执行上下文的生命周期：</p>
+<pre><code class="highlight mermaid">graph LR
+  创建阶段--&gt;执行阶段--&gt;回收阶段</code></pre>
+<h3 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h3><blockquote>
+<p>执行栈又称调用栈，它拥有<strong>后进先出</strong>的结构，用于存储所有的执行上下文。<br>当Javascript引擎开始执行你第一行脚本代码的时候，它就会创建一个全局执行上下文然后将它压到执行栈中，后续每当引擎碰到一个函数的时候，它就会创建一个函数执行上下文，然后将这个执行上下文压到执行栈中，引擎会执行位于执行栈栈顶的执行上下文(一般是函数执行上下文)，当该函数执行结束后，对应的执行上下文就会被弹出，然后控制流程到达执行栈的下一个执行上下文。</p>
+</blockquote>
+</li>
+<li><h2 id="谈谈typeof和instanceof的区别"><a href="#谈谈typeof和instanceof的区别" class="headerlink" title="谈谈typeof和instanceof的区别"></a>谈谈typeof和instanceof的区别</h2><h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><ul>
+<li>typeof返回的是一个变量的基本类型。</li>
+<li>typeof可以返回除(Null)外的基本类型，除(Function)外的引用类型。</li>
+</ul>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><ul>
+<li>instanceof返回的是布尔值。</li>
+<li>instanceof可以准确判断变量的引用类型，但不可以判断变量的基本类型。</li>
+</ul>
+</li>
+<li><h2 id="说说new操作符具体做了什么？"><a href="#说说new操作符具体做了什么？" class="headerlink" title="说说new操作符具体做了什么？"></a>说说new操作符具体做了什么？</h2><ul>
+<li>创建一个新的对象。</li>
+<li>把新的对象的_proto_指向原函数的构造函数。</li>
+<li>将构造函数内的this指向到新对象上。</li>
+<li>检查构造函数返回值。</li>
+</ul>
+<p>new操作符具体流程：</p>
+<pre><code class="highlight mermaid">graph LR
+  新建对象--&gt;_proto_绑定--&gt;this绑定--&gt;检查返回值</code></pre>
+</li>
+<li><h2 id="说说Javascript中的事件模型"><a href="#说说Javascript中的事件模型" class="headerlink" title="说说Javascript中的事件模型"></a>说说Javascript中的事件模型</h2><h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><blockquote>
+<p>在HTML文档或浏览器中发生的一系列交互操作，就称为事件。</p>
+</blockquote>
+<h3 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h3><blockquote>
+<p>由于DOM是一个树结构，因此在出现父子节点绑定事件，触发子节点的时候会引起顺序问题，由此有事件流之概念。  </p>
+</blockquote>
+<p>事件流有三个阶段：</p>
+<ul>
+<li>事件捕获阶段</li>
+<li>处于目标阶段</li>
+<li>事件冒泡阶段</li>
+</ul>
+<h3 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h3><p>事件模型分为三种：</p>
+<ul>
+<li>原始事件模型</li>
+<li>标准事件模型</li>
+<li>IE事件模型</li>
+</ul>
+<p><strong>原始事件模型</strong></p>
+<blockquote>
+<p>没有事件冒泡阶段</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=<span class="string">&quot;func()&quot;</span>&gt; <span class="comment">//此处的onclick绑定事件就是原始事件绑定</span></span><br></pre></td></tr></table></figure>
+<p><strong>标准事件模型</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绑定事件</span></span><br><span class="line"><span class="title function_">addEventListener</span>(eventType, handler, useCapture)</span><br><span class="line"><span class="comment">//删除事件</span></span><br><span class="line"><span class="title function_">removeEventListener</span>(eventType, handler, useCapture)</span><br></pre></td></tr></table></figure>
+
+<p><strong>IE事件模型</strong></p>
+<blockquote>
+<p>没有事件冒泡阶段</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绑定事件</span></span><br><span class="line"><span class="title function_">attachEvent</span>(eventType, handler)</span><br><span class="line"><span class="comment">//删除事件</span></span><br><span class="line"><span class="title function_">detachEvent</span>(eventType, handler)</span><br></pre></td></tr></table></figure>
+</li>
+<li><h2 id="谈谈什么是事件代理？"><a href="#谈谈什么是事件代理？" class="headerlink" title="谈谈什么是事件代理？"></a>谈谈什么是事件代理？</h2><blockquote>
+<p>事件代理就是指<strong>把事件委托在目标元素的外层元素上，当触发目标元素时，通过事件冒泡机制触发到它的外层绑定元素上，执行相应函数。</strong>  </p>
+</blockquote>
+<p><strong>整体有两大优点</strong>：</p>
+<ul>
+<li>减少内存使用。</li>
+<li>动态绑定，避开重复工作。</li>
+</ul>
+</li>
+<li><h2 id="ajax原理是什么？"><a href="#ajax原理是什么？" class="headerlink" title="ajax原理是什么？"></a>ajax原理是什么？</h2><ul>
+<li>创建核心XmlHttpRequest(Xhr)对象。</li>
+<li>通过Xhr对象的open方法，与服务器连接。</li>
+<li>构造请求所需要的数据内容，通过Xhr的send方法发送给服务端。</li>
+<li>通过Xhr对象提供的onreadystagechange监听服务端变化。</li>
+<li>接收并处理服务端返回的结果数据。</li>
+<li>将处理结果用javascript操作DOM实现更新。</li>
+</ul>
+<pre><code class="highlight mermaid">graph LR
+    创建Xhr对象--&gt;|open方法|连接服务器--&gt;|send方法|发送请求--&gt;|onreadystagechange|监听变化--&gt;接收并处理结果--&gt;|操作DOM|更新页面</code></pre>
+</li>
+<li><h2 id="谈谈bind-apply和call三者的区别"><a href="#谈谈bind-apply和call三者的区别" class="headerlink" title="谈谈bind,apply和call三者的区别"></a>谈谈bind,apply和call三者的区别</h2><p><strong>共同点</strong></p>
+<ul>
+<li>目的都是修改this关键字的指向。</li>
+<li>三者第一个参数都是this要指向的对象，如果如果没有这个参数或参数为undefined或null，则默认指向全局window。  </li>
+<li></li>
+</ul>
+<p><strong>不同点</strong></p>
+<ul>
+<li>apply和call是单次传参，bind可多次传参。</li>
+<li>apply的参数为数组，call的参数为参数列表.</li>
+<li>bind返回绑定this参数后的函数，apply和call立即执行函数。</li>
+</ul>
+</li>
+<li><h2 id="说说你对事件循环的理解"><a href="#说说你对事件循环的理解" class="headerlink" title="说说你对事件循环的理解"></a>说说你对事件循环的理解</h2><blockquote>
+<p>同步任务进入主线程，即主执行栈，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就是事件循环。  </p>
+</blockquote>
+<p><strong>任务分为</strong>：</p>
+<ul>
+<li>同步任务：立即执行的任务，同步任务一般会直接进入到主线程中执行。</li>
+<li>异步任务：异步执行的任务，比如ajax网络请求，setTimeout定时函数等<ul>
+<li>微任务：一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前。</li>
+<li>宏任务：宏任务的时间粒度比较大，执行的时间间隔是不能精确控制的，对一些高实时性的需求就不太符合。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h2 id="说说Javascript中常见的内存泄露情况"><a href="#说说Javascript中常见的内存泄露情况" class="headerlink" title="说说Javascript中常见的内存泄露情况"></a>说说Javascript中常见的内存泄露情况</h2><ul>
+<li>意外的全局变量<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func1</span>(<span class="params"></span>)&#123;</span><br><span class="line">  wrong = <span class="number">1</span> <span class="comment">// 变量没有在任何作用域有定义，会在全局作用域中隐式定义</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func2</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">wrong</span> = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func2</span>() <span class="comment">//此时函数内this指向window，又会隐式生成一个全局变量</span></span><br></pre></td></tr></table></figure></li>
+<li>闭包的私有变量<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">funcOutside</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> obj = &#123;......&#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">funcInside</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(obj) <span class="comment">// 没有清理对私有变量的引用</span></span><br><span class="line">    obj = <span class="literal">null</span> <span class="comment">// 需要这样正确清理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>未正确释放的DOM引用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refA = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;refA&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(refA)</span><br><span class="line"><span class="comment">//需要清理</span></span><br><span class="line">refA = <span class="literal">null</span></span><br></pre></td></tr></table></figure></li>
+<li>计时器中的引用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someResource = <span class="title function_">getData</span>();</span><br><span class="line"><span class="title function_">setInteral</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> node = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;node&#x27;</span>)</span><br><span class="line">  <span class="keyword">if</span>(node)&#123;</span><br><span class="line">    <span class="comment">//外部引用</span></span><br><span class="line">    node.<span class="property">innerHTML</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(someResource)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h2 id="谈谈Javascript中的几种本地存储"><a href="#谈谈Javascript中的几种本地存储" class="headerlink" title="谈谈Javascript中的几种本地存储"></a>谈谈Javascript中的几种本地存储</h2><ul>
+<li>cookie</li>
+<li>sessionStorage</li>
+<li>localStorage</li>
+</ul>
+<p><strong>不同点</strong></p>
+<ul>
+<li>存储大小：cookie只能存储最多<strong>4K</strong>大小的文本数据，而后两者可以存储<strong>5MB以上</strong>的数据。</li>
+<li>生命周期：cookie的生命周期取决于<strong>设置的过期时间</strong>，sessionStorage是在<strong>当前窗口关闭的时候会自动删除</strong>，localStorage<strong>存储持久数据</strong>，关闭浏览器不会丢失数据。</li>
+<li>交互方法：cookie的数据会自动传输给服务器，服务器也可以写cookie给客户端。localStorage和sessionStorage只能在本地存储。</li>
+</ul>
+</li>
+<li><h2 id="谈谈Javascript中数字精度丢失的问题"><a href="#谈谈Javascript中数字精度丢失的问题" class="headerlink" title="谈谈Javascript中数字精度丢失的问题"></a>谈谈Javascript中数字精度丢失的问题</h2><blockquote>
+<p>简单的说，就是十进制数字需要先转为二进制数，然后再进行计算后转回十进制数得到结果。其中，进制的转换会由于<strong>位数限制、某些数转二进制出现无限循环</strong>造成数值转换后会出现偏差，导致结果不符合直觉。</p>
+</blockquote>
+</li>
+<li><h2 id="什么是防抖和节流？"><a href="#什么是防抖和节流？" class="headerlink" title="什么是防抖和节流？"></a>什么是防抖和节流？</h2><h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><blockquote>
+<p>防抖就是指在n秒后再执行事件，如果在n秒内重复触发，则重新计时。</p>
+</blockquote>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><blockquote>
+<p>节流就是指在n秒内只执行一次事件，如果在n秒内重复触发，只有一次生效。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="进阶问题"><a href="#进阶问题" class="headerlink" title="进阶问题"></a>进阶问题</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hanxian-wang.github.io">Harry Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hanxian-wang.github.io/2025/05/28/interview.data-1/">http://hanxian-wang.github.io/2025/05/28/interview.data-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hanxian-wang.github.io" target="_blank">Hanxian's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Javascript/">Javascript</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/28/interview.data-2/" title="CSS八股文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">CSS八股文</div></div><div class="info-2"><div class="info-item-1">关于CSS的面试八股文</div></div></div></a><a class="pagination-related" href="/2025/06/01/competition.gis-2/" title="超图高校杯 命题开发组开发心得"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">超图高校杯 命题开发组开发心得</div></div><div class="info-2"><div class="info-item-1">关于参加2024年第22届超图高校GIS大赛(命题开发组)的一些心得体会</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqusjs-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Harry Wang</div><div class="author-info-description">一名热爱羽毛球运动的程序员(GISer)🧑‍💻</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/hanxian-wang" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xianha1ry@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎你来到我的博客！我会不定期在这儿更新自己的一些心得与体会。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">基础问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9F%E4%BB%96%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E7%9A%84%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Javascript 中有什么数据类型？他们的区别的有什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88-Javascript-%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9C%BA%E5%88%B6"><span class="toc-number">1.2.</span> <span class="toc-text">谈谈 Javascript 中的类型转换机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88-Javascript-%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85%EF%BC%8C%E9%97%AD%E5%8C%85%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">谈谈 Javascript 中的闭包，闭包有什么特点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E2%80%99-%E2%80%99%E5%92%8C%E2%80%99-%E2%80%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.</span> <span class="toc-text">操作符’&#x3D;&#x3D;’和’&#x3D;&#x3D;&#x3D;’的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.</span> <span class="toc-text">深拷贝和浅拷贝的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-number">1.5.1.</span> <span class="toc-text">浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-number">1.5.2.</span> <span class="toc-text">深拷贝</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">什么是作用域链？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.6.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">1.6.2.</span> <span class="toc-text">作用域链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88-Javascript-%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-number">1.7.</span> <span class="toc-text">谈谈 Javascript 中的原型和原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B"><span class="toc-number">1.7.1.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-number">1.7.2.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.7.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-Javascript-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="toc-number">1.8.</span> <span class="toc-text">在 Javascript 中如何实现继承？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.1.</span> <span class="toc-text">原型链继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.2.</span> <span class="toc-text">构造函数继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.3.</span> <span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.4.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.5.</span> <span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF"><span class="toc-number">1.8.6.</span> <span class="toc-text">寄生组合式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9this%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.9.</span> <span class="toc-text">谈谈你对this对象的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#this%E5%85%B3%E9%94%AE%E5%AD%97%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.9.1.</span> <span class="toc-text">this关键字是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E8%A7%84%E5%88%99%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.9.2.</span> <span class="toc-text">绑定规则和优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">1.9.3.</span> <span class="toc-text">箭头函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.10.</span> <span class="toc-text">Javascript中执行上下文和执行栈是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.10.1.</span> <span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%88"><span class="toc-number">1.10.2.</span> <span class="toc-text">执行栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88typeof%E5%92%8Cinstanceof%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.11.</span> <span class="toc-text">谈谈typeof和instanceof的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-number">1.11.1.</span> <span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-number">1.11.2.</span> <span class="toc-text">instanceof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4new%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.12.</span> <span class="toc-text">说说new操作符具体做了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4Javascript%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.13.</span> <span class="toc-text">说说Javascript中的事件模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.13.1.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.13.2.</span> <span class="toc-text">事件流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.13.3.</span> <span class="toc-text">事件模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%9F"><span class="toc-number">1.14.</span> <span class="toc-text">谈谈什么是事件代理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.15.</span> <span class="toc-text">ajax原理是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88bind-apply%E5%92%8Ccall%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.16.</span> <span class="toc-text">谈谈bind,apply和call三者的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.17.</span> <span class="toc-text">说说你对事件循环的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4Javascript%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%83%85%E5%86%B5"><span class="toc-number">1.18.</span> <span class="toc-text">说说Javascript中常见的内存泄露情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88Javascript%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">1.19.</span> <span class="toc-text">谈谈Javascript中的几种本地存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88Javascript%E4%B8%AD%E6%95%B0%E5%AD%97%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.20.</span> <span class="toc-text">谈谈Javascript中数字精度丢失的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%EF%BC%9F"><span class="toc-number">1.21.</span> <span class="toc-text">什么是防抖和节流？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8A%96"><span class="toc-number">1.21.1.</span> <span class="toc-text">防抖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%B5%81"><span class="toc-number">1.21.2.</span> <span class="toc-text">节流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">进阶问题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/04/daily.share-1/" title="一些日常生活的琐事">一些日常生活的琐事</a><time datetime="2025-06-03T16:00:00.000Z" title="发表于 2025-06-04 00:00:00">2025-06-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/01/competition.gis-2/" title="超图高校杯 命题开发组开发心得">超图高校杯 命题开发组开发心得</a><time datetime="2025-05-31T16:00:00.000Z" title="发表于 2025-06-01 00:00:00">2025-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/28/interview.data-2/" title="CSS八股文">CSS八股文</a><time datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/28/interview.data-1/" title="Javascript八股文">Javascript八股文</a><time datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/competition.gis-1/" title="测绘程序设计大赛心得">测绘程序设计大赛心得</a><time datetime="2024-04-30T16:00:00.000Z" title="发表于 2024-05-01 00:00:00">2024-05-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top_banner.jpg);"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">留下的话</p><div class="bg-ad"><div>这儿不仅是我的技术博客，也是我作为发布一些日常的互联网居住地，欢迎您的到来！</div></div></div><div class="t-t-r"><p class="ft-t t-l-t">导航</p><ul class="ft-links"><li><a target="_blank" rel="noopener" href="https://hanxian.wang/about/">关于博主</a><a target="_blank" rel="noopener" href="https://hanxian.wang/archives/">文章归档</a></li><li><a target="_blank" rel="noopener" href="https://hanxian.wang/categories/">文章分类</a><a target="_blank" rel="noopener" href="https://hanxian.wang/tags/">文章标签</a></li></ul></div></div></div></div><div class="copyright">&copy;2019 - 2025  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Harry Wang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="custom_text">健康快乐每一天</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'== 'shuoshuo'
+  const dqOption = null
+
+  const destroyDisqusjs = () => {
+    disqusjs.destroy()
+    window.disqusjs = null
+  }
+
+  const themeChange = (el, path) => {
+    destroyDisqusjs()
+    initDisqusjs(el, path)
+  }
+
+  const initDisqusjs = (el = document, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyDisqusjs = () => {
+        destroyDisqusjs()
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    disqusjs = new DisqusJS({
+      shortname: 'hanxian-wang',
+      title: 'Javascript八股文',
+      apikey: '',
+      ...dqOption,
+      identifier: isShuoshuo ? path : (dqOption && dqOption.identifier) || '/2025/05/28/interview.data-1/',
+      url: isShuoshuo ? location.origin + path : (dqOption && dqOption.url) || 'http://hanxian-wang.github.io/2025/05/28/interview.data-1/'
+    })
+
+    disqusjs.render(el.querySelector('#disqusjs-wrap'))
+
+    btf.addGlobalFn('themeChange', () => themeChange(el, path), 'disqusjs')
+  }
+
+  const loadDisqusjs = async(el, path) => {
+    if (window.disqusJsLoad) initDisqusjs(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/disqusjs/dist/browser/styles/disqusjs.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/disqusjs/dist/browser/disqusjs.es2015.umd.min.js')
+      initDisqusjs(el, path)
+      window.disqusJsLoad = true
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqusjs-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=hanxian-wang&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Disqusjs' === 'Disqusjs'
+      ? window.shuoshuoComment = { loadComment: loadDisqusjs }
+      : window.loadOtherComment = loadDisqusjs
+    return
+  }
+
+  if ('Disqusjs' === 'Disqusjs' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqusjs-wrap'), loadDisqusjs)
+    else {
+      loadDisqusjs()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqusjs
+  }
+})()</script></div><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_key = 'bCwPNclPutvS6SEy';</script><script src="https://ai.tianli0.top/static/public/tianli_gpt.min.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="100" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

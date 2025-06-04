@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CSS八股文 | Hanxian's Blog</title><meta name="author" content="Harry Wang"><meta name="copyright" content="Harry Wang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="关于CSS的面试八股文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS八股文">
+<meta property="og:url" content="http://hanxian-wang.github.io/2025/05/28/interview.data-2/index.html">
+<meta property="og:site_name" content="Hanxian&#39;s Blog">
+<meta property="og:description" content="关于CSS的面试八股文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hanxian-wang.github.io/img/avatar.png">
+<meta property="article:published_time" content="2025-05-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-01T06:24:12.791Z">
+<meta property="article:author" content="Harry Wang">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hanxian-wang.github.io/img/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CSS八股文",
+  "url": "http://hanxian-wang.github.io/2025/05/28/interview.data-2/",
+  "image": "http://hanxian-wang.github.io/img/avatar.png",
+  "datePublished": "2025-05-27T16:00:00.000Z",
+  "dateModified": "2025-06-01T06:24:12.791Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Harry Wang",
+      "url": "http://hanxian-wang.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.png"><link rel="canonical" href="http://hanxian-wang.github.io/2025/05/28/interview.data-2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CSS八股文',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="https://ai.tianli0.top/static/public/tianli_gpt.min.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Hanxian's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-table"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/notes/"><span> 摘要</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/top_banner.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hanxian's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">CSS八股文</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-table"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/notes/"><span> 摘要</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">CSS八股文</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-01T06:24:12.791Z" title="更新于 2025-06-01 14:24:12">2025-06-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">548</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="基础问题"><a href="#基础问题" class="headerlink" title="基础问题"></a>基础问题</h1><ul>
+<li><h2 id="说说你对盒子模型的理解"><a href="#说说你对盒子模型的理解" class="headerlink" title="说说你对盒子模型的理解"></a>说说你对盒子模型的理解</h2><p><strong>盒子模型的图例</strong><br><img src="https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Core/Styling_basics/Box_model/box-model.png" alt="盒子模型" title="盒子模型图例"><br>盒子模型主要分为两种：</p>
+<ul>
+<li>标准盒子模型：content的width&#x2F;height不包含padding&#x2F;border</li>
+<li>怪异盒子模型：content的width&#x2F;height包含padding&#x2F;border</li>
+</ul>
+</li>
+<li><h2 id="CSS选择器有哪些？优先级如何？"><a href="#CSS选择器有哪些？优先级如何？" class="headerlink" title="CSS选择器有哪些？优先级如何？"></a>CSS选择器有哪些？优先级如何？</h2><ul>
+<li><strong>常用的选择器有：</strong><ul>
+<li>ID选择器 #a</li>
+<li>类选择器 .a</li>
+<li>标签选择器 div</li>
+<li>子选择器 #a b</li>
+<li>后代选择器 a&gt;a_1</li>
+<li>相邻同胞选择器 .a+.b</li>
+<li>群组选择器 div,p</li>
+</ul>
+</li>
+<li><strong>不常用的选择器有：</strong><ul>
+<li>伪类选择器</li>
+<li>伪元素选择器</li>
+<li>属性选择器</li>
+<li>层次选择器</li>
+</ul>
+</li>
+<li><strong>优先级:</strong> 内联&gt;ID&gt;类&gt;…</li>
+</ul>
+</li>
+<li><h2 id="谈谈你对Flex布局的理解"><a href="#谈谈你对Flex布局的理解" class="headerlink" title="谈谈你对Flex布局的理解"></a>谈谈你对Flex布局的理解</h2><blockquote>
+<p>Flex布局，即弹性盒子布局，容器内部是有一条主轴和与之形成直角的交叉轴构成，容器内元素默认沿主轴方向排列，其方向由flex-direction决定。  </p>
+</blockquote>
+<p><strong>Flex布局图例</strong><br><img src="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox/basics1.svg" alt="flex布局" title="flex布局图例"><br><img src="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox/basics3.svg" alt="flex布局" title="flex布局图例"></p>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<h3 id="成员属性"><a href="#成员属性" class="headerlink" title="成员属性"></a>成员属性</h3><ul>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ul>
+</li>
+<li><h2 id="谈谈你对BFC的理解"><a href="#谈谈你对BFC的理解" class="headerlink" title="谈谈你对BFC的理解"></a>谈谈你对BFC的理解</h2><p> BFC（Block Formatting Context），即块级格式化上下文，它是页面中的一块渲染区域，并且有一套属于自己的渲染规则：</p>
+<ul>
+<li>内部的盒子会在垂直方向上一个接一个的放置</li>
+<li>对于同一个BFC的俩个相邻的盒子的margin会发生重叠，与方向无关。</li>
+<li>每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此</li>
+<li>BFC的区域不会与float的元素区域重叠</li>
+<li>计算BFC的高度时，浮动子元素也参与计算</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然 <blockquote>
+<p>BFC目的是形成一个相对于外界完全独立的空间，让内部的子元素不会影响到外部的元素。</p>
+</blockquote>
+</li>
+</ul>
+<p> <strong>触发条件</strong></p>
+<ul>
+<li>根元素，即HTML元素</li>
+<li>浮动元素：float值为left、right</li>
+<li>overflow值不为 visible，为 auto、scroll、hidden</li>
+<li>display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid</li>
+<li>position的值为absolute或fixed</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hanxian-wang.github.io">Harry Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hanxian-wang.github.io/2025/05/28/interview.data-2/">http://hanxian-wang.github.io/2025/05/28/interview.data-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hanxian-wang.github.io" target="_blank">Hanxian's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSS/">CSS</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/05/01/competition.gis-1/" title="测绘程序设计大赛心得"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">测绘程序设计大赛心得</div></div><div class="info-2"><div class="info-item-1">关于参加测绘程序设计大赛(C#)的心得</div></div></div></a><a class="pagination-related" href="/2025/05/28/interview.data-1/" title="Javascript八股文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Javascript八股文</div></div><div class="info-2"><div class="info-item-1">关于Javascipt的面试八股文</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqusjs-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Harry Wang</div><div class="author-info-description">一名热爱羽毛球运动的程序员(GISer)🧑‍💻</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/hanxian-wang" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xianha1ry@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎你来到我的博客！我会不定期在这儿更新自己的一些心得与体会。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">基础问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.</span> <span class="toc-text">说说你对盒子模型的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E9%80%89%E6%8B%A9%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E4%BC%98%E5%85%88%E7%BA%A7%E5%A6%82%E4%BD%95%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">CSS选择器有哪些？优先级如何？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9Flex%E5%B8%83%E5%B1%80%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">谈谈你对Flex布局的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">容器属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">成员属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9BFC%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.4.</span> <span class="toc-text">谈谈你对BFC的理解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/04/daily.share-1/" title="一些日常生活的琐事">一些日常生活的琐事</a><time datetime="2025-06-03T16:00:00.000Z" title="发表于 2025-06-04 00:00:00">2025-06-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/01/competition.gis-2/" title="超图高校杯 命题开发组开发心得">超图高校杯 命题开发组开发心得</a><time datetime="2025-05-31T16:00:00.000Z" title="发表于 2025-06-01 00:00:00">2025-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/28/interview.data-2/" title="CSS八股文">CSS八股文</a><time datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/28/interview.data-1/" title="Javascript八股文">Javascript八股文</a><time datetime="2025-05-27T16:00:00.000Z" title="发表于 2025-05-28 00:00:00">2025-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/competition.gis-1/" title="测绘程序设计大赛心得">测绘程序设计大赛心得</a><time datetime="2024-04-30T16:00:00.000Z" title="发表于 2024-05-01 00:00:00">2024-05-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/top_banner.jpg);"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">留下的话</p><div class="bg-ad"><div>这儿不仅是我的技术博客，也是我作为发布一些日常的互联网居住地，欢迎您的到来！</div></div></div><div class="t-t-r"><p class="ft-t t-l-t">导航</p><ul class="ft-links"><li><a target="_blank" rel="noopener" href="https://hanxian.wang/about/">关于博主</a><a target="_blank" rel="noopener" href="https://hanxian.wang/archives/">文章归档</a></li><li><a target="_blank" rel="noopener" href="https://hanxian.wang/categories/">文章分类</a><a target="_blank" rel="noopener" href="https://hanxian.wang/tags/">文章标签</a></li></ul></div></div></div></div><div class="copyright">&copy;2019 - 2025  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Harry Wang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="custom_text">健康快乐每一天</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = `%%{init:{ 'theme':'${theme}'}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'== 'shuoshuo'
+  const dqOption = null
+
+  const destroyDisqusjs = () => {
+    disqusjs.destroy()
+    window.disqusjs = null
+  }
+
+  const themeChange = (el, path) => {
+    destroyDisqusjs()
+    initDisqusjs(el, path)
+  }
+
+  const initDisqusjs = (el = document, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyDisqusjs = () => {
+        destroyDisqusjs()
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    disqusjs = new DisqusJS({
+      shortname: 'hanxian-wang',
+      title: 'CSS八股文',
+      apikey: '',
+      ...dqOption,
+      identifier: isShuoshuo ? path : (dqOption && dqOption.identifier) || '/2025/05/28/interview.data-2/',
+      url: isShuoshuo ? location.origin + path : (dqOption && dqOption.url) || 'http://hanxian-wang.github.io/2025/05/28/interview.data-2/'
+    })
+
+    disqusjs.render(el.querySelector('#disqusjs-wrap'))
+
+    btf.addGlobalFn('themeChange', () => themeChange(el, path), 'disqusjs')
+  }
+
+  const loadDisqusjs = async(el, path) => {
+    if (window.disqusJsLoad) initDisqusjs(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/disqusjs/dist/browser/styles/disqusjs.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/disqusjs/dist/browser/disqusjs.es2015.umd.min.js')
+      initDisqusjs(el, path)
+      window.disqusJsLoad = true
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqusjs-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=hanxian-wang&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Disqusjs' === 'Disqusjs'
+      ? window.shuoshuoComment = { loadComment: loadDisqusjs }
+      : window.loadOtherComment = loadDisqusjs
+    return
+  }
+
+  if ('Disqusjs' === 'Disqusjs' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqusjs-wrap'), loadDisqusjs)
+    else {
+      loadDisqusjs()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqusjs
+  }
+})()</script></div><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_key = 'bCwPNclPutvS6SEy';</script><script src="https://ai.tianli0.top/static/public/tianli_gpt.min.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="100" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
