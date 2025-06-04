@@ -122,6 +122,9 @@
     max-height: 80px;
 }
 
+#tianliGPT-tag {
+    display: none !important;
+}
 @media screen and (max-width: 768px) {
 
     .ft-item-1 {
